@@ -15,6 +15,7 @@ class Content extends React.Component {
 					Ticketing System. Below you can do the following:
 					<ol>
 						<li>Restart your VM</li>
+						<li>Request a software package install</li>
 					</ol>
 				</Message>
 			</div>
