@@ -22,7 +22,7 @@ class ModalForm extends Component {
 	render() {
 		return (
 			<div style={{ display: "inline", margin: "0.5rem" }}>
-				<Button onClick={this.handleOpen}>New Ticket</Button>
+				<Button onClick={this.handleOpen}>Create Ticket</Button>
 				<Modal
 					size="small"
 					open={this.state.modalOpen}
