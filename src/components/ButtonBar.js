@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../App.css";
 import RestartVMButton from "./RestartVMButton";
+import PackageInstallationModal from "./PackageInstallationModal";
 
 /* 
 	Component: ButtonBar
@@ -12,6 +13,7 @@ class ButtonBar extends Component {
 		return (
 			<div>
 				<RestartVMButton></RestartVMButton>
+				<PackageInstallationModal></PackageInstallationModal>
 			</div>
 		);
 	}
