@@ -22,7 +22,7 @@ class PackageInstallationModal extends Component {
 	render() {
 		return (
 			<div style={{ display: "inline", margin: "0.5rem" }}>
-				<Button onClick={this.handleOpen}>Package Installation</Button>
+				<Button onClick={this.handleOpen}>Install Package</Button>
 
 				<Modal
 					size="small"
@@ -30,7 +30,7 @@ class PackageInstallationModal extends Component {
 					onClose={this.handleClose}
 					closeIcon
 				>
-					<Modal.Header>Package Installation</Modal.Header>
+					<Modal.Header>Install Package</Modal.Header>
 					<Modal.Content>
 						<PackageInstallationForm
 							handleClose={this.handleClose}
