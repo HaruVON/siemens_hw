@@ -31,6 +31,24 @@ def get_ip():
         return request.environ['HTTP_X_FORWARDED_FOR']
 
 
+# Function: install_package_route
+# Description: Route to install a package
+# Returns: A response dictionary used by the React from end
+@app.route('/api/install-package/<string:package>/')
+def install_package_route(package):
+    # Set package string to lowercase to process
+    package = package.lower()
+    
+    # Get the client's IP address
+    ip_address = get_ip()
+
+    # Call the install_package_task function
+    api_response = install_package_task(ip_address, package)
+    log = "IP Address: %s installed a package", ip_address
+
+    return check_request(api_response, log)
+
+
 # Function: restart_vm_route
 # Description: Route to restart a vm
 # Returns: A response dictionary used by the React from end
