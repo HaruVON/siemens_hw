@@ -41,7 +41,7 @@ def create_ticket_route(ticket_msg, ticket_rate):
     ip_address = get_ip()
 
     api_response = process_ticket_task(ip_address, ticket_msg, ticket_rate)
-    log = "IP Address: %s requested a new ticket", ip_address
+    log = f"IP Address: {ip_address} requested a new ticket"
 
     return check_request(api_response, log)
 
@@ -59,7 +59,7 @@ def install_package_route(package):
 
     # Call the install_package_task function
     api_response = install_package_task(ip_address, package)
-    log = "IP Address: %s installed a package", ip_address
+    log = f"IP Address: {ip_address} installed {package}"
 
     return check_request(api_response, log)
 
@@ -74,7 +74,6 @@ def restart_vm_route():
 
     # Call the restart_vm_task function
     api_response = restart_vm_task(ip_address)
-    log = "IP Address: %s restarted their vm", ip_address
-    msg = api_response["response"]
+    log = f"IP Address: {ip_address} restarted their vm"
 
     return check_request(api_response, log)
