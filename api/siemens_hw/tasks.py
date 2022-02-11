@@ -3,6 +3,29 @@
 
 import csv
 
+# Function: install_package_task
+# Description: Installs an approved package to the corresponding
+# IP
+# Returns: A response dictionary used by the routes file
+def install_package_task(ip_address, package):
+    
+    # List of approved packages
+    packages = ["docker", "kdiff3", "meld", "postgres", "tmux"]
+
+    # Run install package command if package is in the approved
+    # packages list
+    if package in packages:
+        # Actual command
+        # result = os.popen('ssh root@%s \'dnf install %s -y\'', ip_address, package)
+        # if result = 0:
+        #    return Response("Package Installed", status=200)
+        # else:
+        #    return Response("Something went wrong", status=500)
+        return { "response": "Package Installed", "status": 200 }
+    
+    return { "response": "Invalid Package", "status": 500 }
+        
+
 # Function: process_ticket_task
 # Description: Appends a ticket row to the CSV file
 # Returns: A response dictionary used by the routes file
@@ -24,7 +47,6 @@ def process_ticket_task(ip_address, ticket_msg, ticket_rate):
 
 
     return { "response": "Ticket Processed", "status": 200 }
-
 
 
 # Function: restart_vm_task

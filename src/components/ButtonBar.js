@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import "../App.css";
-import RestartVMButton from "./RestartVMButton";
+import NewTicketModal from "./NewTicketModal";
 import PackageInstallationModal from "./PackageInstallationModal";
+import RestartVMButton from "./RestartVMButton";
 
 /* 
 	Component: ButtonBar
@@ -14,6 +15,7 @@ class ButtonBar extends Component {
 			<div>
 				<RestartVMButton></RestartVMButton>
 				<PackageInstallationModal></PackageInstallationModal>
+				<NewTicketModal></NewTicketModal>
 			</div>
 		);
 	}

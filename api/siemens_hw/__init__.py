@@ -1,6 +1,7 @@
 import logging
 from logging.handlers import RotatingFileHandler
 import os
+import csv
 
 from flask import Flask
 
@@ -25,6 +26,21 @@ if not app.debug:
 
     app.logger.addHandler(file_handler)
     app.logger.setLevel(logging.INFO)
+
+    # Setup csv file for grafana
+    path = "./logs/grafana/grafana_tickets.csv"
+
+    # Make sure logs/grafana path exists
+    if not os.path.exists('logs/grafana'):
+        os.mkdir('logs/grafana')
+
+    # Check to see if csv file exists, if not setup headers in 
+    # csv file
+    if not os.path.exists(path):
+        fields = ['Priority Rating', 'Ticket Message']
+        with open(path, 'w') as csv_file:
+            csv_writer = csv.writer(csv_file)
+            csv_writer.writerow(fields)
 
 
 from siemens_hw import routes

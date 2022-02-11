@@ -1,6 +1,7 @@
+from ipaddress import ip_address
 from flask import request
 from siemens_hw import app
-from siemens_hw.tasks import restart_vm_task
+from siemens_hw.tasks import restart_vm_task, install_package_task, process_ticket_task
 
 
 # Function: check_request
@@ -29,6 +30,20 @@ def get_ip():
         return request.environ['REMOTE_ADDR']
     else:
         return request.environ['HTTP_X_FORWARDED_FOR']
+
+
+# Function: create_ticket_route
+# Description: Route to create a new ticket
+# Returns: A response dictionary used by the React from end
+@app.route('/api/create-ticket/<string:ticket_msg>/<string:ticket_rate>/')
+def create_ticket_route(ticket_msg, ticket_rate):
+    # Get the client's IP address 
+    ip_address = get_ip()
+
+    api_response = process_ticket_task(ip_address, ticket_msg, ticket_rate)
+    log = "IP Address: %s requested a new ticket", ip_address
+
+    return check_request(api_response, log)
 
 
 # Function: install_package_route
