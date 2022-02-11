@@ -7,4 +7,11 @@
 # Returns: A response dictionary used by the routes file
 def restart_vm_task(ip_address):
     
-    pass
+    # Actual command
+    # result = os.popen('ssh root@%s reboot', ip_address)
+    result = 0
+
+    if result == 0:
+        return { "response": "VM Restarted", "status": 200 }
+
+    return { "response": "Something went wrong", "status": 500 }
