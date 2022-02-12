@@ -1,70 +1,257 @@
-# Getting Started with Create React App
+# Siemens HW
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a web app that serves as a ticketing service that allows the user to do the following functions:
 
-## Available Scripts
+-   Restart VM
+-   Install Package
+-   Create Ticket
+    -   Request for new functionality
 
-In the project directory, you can run:
+## Requirements
 
-### `npm start`
+-   Docker
+-   Docker-Compose
+-   Python
+-   Nginx
+-   NodeJS
+-   React
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Node Requirements
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+-   @emotion/react
+-   @emotion/styled
+-   @mui/material
+-   notistack
+-   semantic-ui-css
+-   semantic-ui-react
 
-### `npm test`
+### Python Requirements
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+-   Flask
+-   Gunicorn
+-   Pipenv
+-   Pytest
 
-### `npm run build`
+## Structure
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The structure of the project is shown below:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+.
+|____api
+| |____app.py
+| |____siemens_hw
+| | |______init__.py
+| |____tests
+| | |____unit
+|____docker-compose.yml
+|____Dockerfile
+|____packaging
+| |____docker
+| | |____start.sh
+| |____README.md
+| |____service_files
+| | |____nginx
+|____public
+|____README.md
+|____src
+| |____App.js
+| |____components
+| |____index.js
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This project has three main parts:
 
-### `npm run eject`
+-   **ReactJS**: in src/
+-   **Python Flask**: in api/
+-   **Packaging**: in packaging/
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+The Packaging directory is utilized by Docker for container setup and entrypoint script.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The ReactJS directory is the front-end aspect of the project and communicates with the Python Flask directory where all of the API calls are. This is to seperate the frontend and the backend to make the project more modular.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### ReactJS Structure
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+The main component of the ReactJS structure is in src/. This directory holds all of the pages and components (in src/components) of the pages of the web app.
 
-## Learn More
+```bash
+.
+|____src
+| |____App.js
+| |____components
+| |____index.js
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Flask Structure
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The main component of the Flask backend is in api/. The api directory hold siemens_hw: the main part of the Flask app that holds tasks.py and routes.py, and tests: the directory that holds all of the Flask testing.
 
-### Code Splitting
+```bash
+.
+|____api
+| |____siemens_hw
+| |____tests
+| | |____unit
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Packaging Structure
 
-### Analyzing the Bundle Size
+The packagaing directory has all of the Nginx config templates and the docker entrypoint script.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+.
+|____packaging
+| |____docker
+| | |____start.sh
+| |____README.md
+| |____service_files
+| | |____nginx
+```
 
-### Making a Progressive Web App
+## Setup
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Python Setup
 
-### Advanced Configuration
+All following commands assume you're in the api/ directory.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+To setup and install the Python Flask venv the following command is utilized:
 
-### Deployment
+```bash
+pipenv install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+To install new dependencies one can utilize the following commands:
 
-### `npm run build` fails to minify
+```bash
+pipenv install <package_name>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# or to install a development package:
+pipenv install <package_name> --dev
+```
+
+### React Setup
+
+All following commands assume you're in the project root directory.
+
+To setup and install the NodeJS dependencies:
+
+```bash
+npm i
+```
+
+To install new dependencies one can utilize the following commands:
+
+```bash
+npm install <package_name>
+
+# or to install a development package:
+npm install <package_name> --dev
+```
+
+## Usage
+
+This Web App can be ran by using Docker (Production), or NPM and Gunicorn (Development), or Nginx, NPM, Gunicorn (Production). I will be going over how to run it in Docker (Production) and Development.
+
+### Testing
+
+#### Flask Testing
+
+The following commands for the back-end assume that you're in api/.
+
+Run all Python tests:
+
+```bash
+pipenv run python -m pytest -v
+```
+
+### Running in Development
+
+#### Front-End
+
+The following commands for the front-end assume that you're in the project root directory.
+
+Start NPM server:
+
+```
+npm run start
+```
+
+#### Back-End
+
+The following commands for the back-end assume that you're in api/.
+
+Start Gunicorn server:
+
+```
+pipenv run gunicorn -b 127.0.0.1:5000 siemens_hw:app
+```
+
+### Running in Production (Docker)
+
+All commands assume that you're in the root of the project directory.
+
+#### Docker
+
+Build Docker image:
+
+```bash
+docker build -t <name_of_image> .
+```
+
+Run Docker image in a container:
+
+```bash
+docker run -d -p <host_port>:<container_port> --name <name_of_container>  <name_of_image>
+```
+
+Execute a command in a Docker container:
+
+```bash
+docker exec  <container_name>  <command>
+# or for an interactive session:
+docker exec  <container_name> bash
+```
+
+Stop Docker container:
+
+```bash
+docker stop <name_of_container>
+```
+
+Remove Docker container:
+
+```bash
+docker rm <name_of_container>
+```
+
+#### Docker-Compose
+
+Build Docker image:
+
+```bash
+docker-compose build
+```
+
+Build Docker image and run in a container (development):
+
+```bash
+docker-compose up
+
+# or for production
+docker-compose up -d
+```
+
+Stop and remove docker containers and networks:
+
+```bash
+docker-compose down
+```
+
+Start or Stop Docker container
+
+```bash
+docker-compose start
+
+# or
+docker-compose stop
+```
