@@ -164,6 +164,8 @@ Run all Python tests:
 pipenv run python -m pytest -v
 ```
 
+The tests are auto ran when building a Docker image.
+
 ### Running in Development
 
 #### Front-End
