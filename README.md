@@ -6,6 +6,7 @@ This project is a web app that serves as a ticketing service that allows the use
 -   Install Package
 -   Create Ticket
     -   Request for new functionality
+    -   Creates a log file for use with an external dashboard such as grafana
 
 ## Requirements
 
@@ -257,3 +258,8 @@ docker-compose start
 # or
 docker-compose stop
 ```
+
+## Tasks
+
+### Create Ticket
+- [ ] Create a built in dashboard to view the created tickets
