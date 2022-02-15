@@ -4,7 +4,7 @@ networks:
     siemens_hw:
 
 volumes:
-    siemens_hw_logs: {}
+    logs: {}
 
 services:
     web:
@@ -13,4 +13,4 @@ services:
         ports:
             - "80:80"
         volumes:
-            - siemens_hw_logs:/var/www/siemens_hw/api/logs:rw
+            - logs:/var/www/siemens_hw/api/logs:rw
