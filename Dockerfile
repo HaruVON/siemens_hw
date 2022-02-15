@@ -14,7 +14,6 @@ FROM nginx:alpine
 COPY --from=build /var/www/siemens_hw /var/www/siemens_hw
 
 WORKDIR /var/www/siemens_hw
-EXPOSE 5000
 
 # Install python, install pipenv, make sites-available
 # and sites-enabled directories, move siemens_hw.nginx.conf 
