@@ -1,4 +1,3 @@
-from ipaddress import ip_address
 from siemens_hw import app
 from siemens_hw.routes import check_request
 from siemens_hw.tasks import restart_vm_task
