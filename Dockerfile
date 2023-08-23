@@ -21,9 +21,9 @@ WORKDIR /var/www/siemens_hw
 # sites-enabled directory, mv proxy_params and nginx.conf to 
 # /etc/nginx, install pyhon dependencies using pipenv
 # test the python api, uninstall pytest, clean up files
-RUN apk add python3 \
-  && apk add py3-pip \
-  && pip install pipenv \
+RUN apk add --no-cache python3 \
+  && apk add --no-cache py3-pip \
+  && pip install --no-cache pipenv \
   && mkdir -p /etc/nginx/sites-available /etc/nginx/sites-enabled \
   && mv packaging/service_files/nginx/siemens_hw.nginx.conf /etc/nginx/sites-available \
   && ln -sf /etc/nginx/sites-available/siemens_hw.nginx.conf /etc/nginx/sites-enabled/siemens_hw.nginx.conf \
